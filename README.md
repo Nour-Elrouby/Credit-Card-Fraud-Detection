@@ -1,19 +1,27 @@
-# Credit Card Fraud Detection
+<h1 align="center">Credit Card Fraud Detection</h1>
+
+<p align="center">
+  <a href="https://www.python.org/"><img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-2563EB?style=for-the-badge&amp;logo=python&amp;logoColor=white&amp;labelColor=111827"></a>
+  <a href="https://scikit-learn.org/"><img alt="scikit-learn 1.3+" src="https://img.shields.io/badge/scikit--learn-1.3%2B-0F766E?style=for-the-badge&amp;logo=scikitlearn&amp;logoColor=white&amp;labelColor=111827"></a>
+  <a href="https://xgboost.readthedocs.io/"><img alt="XGBoost 2.0+" src="https://img.shields.io/badge/XGBoost-2.0%2B-7C3AED?style=for-the-badge&amp;logoColor=white&amp;labelColor=111827"></a>
+  <a href="https://jupyter.org/"><img alt="Jupyter Notebook" src="https://img.shields.io/badge/Jupyter-Notebook-D97706?style=for-the-badge&amp;logo=jupyter&amp;logoColor=white&amp;labelColor=111827"></a>
+</p>
+
+<p align="center">
+  An end-to-end machine-learning project for detecting fraudulent credit card<br>
+  transactions in severely imbalanced data. It compares three resampling strategies<br>
+  across four classifiers using precision, recall, F1-score, and ROC-AUC.
+</p>
+
+<p align="center">
+  <a href="./Fraud%20Detection.ipynb"><strong>Explore the notebook</strong></a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud"><strong>Get the dataset</strong></a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#model-performance"><strong>View results</strong></a>
+</p>
 
 ---
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-2563EB?style=for-the-badge&logo=python&logoColor=white&labelColor=111827)](https://www.python.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-0F766E?style=for-the-badge&logo=scikitlearn&logoColor=white&labelColor=111827)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-7C3AED?style=for-the-badge&logoColor=white&labelColor=111827)](https://xgboost.readthedocs.io/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-D97706?style=for-the-badge&logo=jupyter&logoColor=white&labelColor=111827)](https://jupyter.org/)
-
-An end-to-end machine-learning project for detecting fraudulent credit card
-transactions in severely imbalanced data. It audits and explores 284,807
-transactions, compares three resampling strategies across four classifiers, and
-selects the strongest model using precision, recall, F1-score, and ROC-AUC
-rather than misleading raw accuracy.
-
-[Explore the notebook](./Fraud%20Detection.ipynb) | [Get the dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) | [View results](#model-performance)
 
 > [!IMPORTANT]
 > Fraud predictions should support, not replace, analyst review and human
