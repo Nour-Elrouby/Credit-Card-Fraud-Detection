@@ -1,22 +1,24 @@
-<div align="center">
-
 # Credit Card Fraud Detection
 
-### Machine learning for highly imbalanced transaction data
+---
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-006600?style=flat-square)](https://xgboost.readthedocs.io/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=flat-square&logo=jupyter&logoColor=white)](https://jupyter.org/)
 
-An end-to-end fraud detection study comparing four classifiers and three
-resampling strategies on 284,807 real-world credit card transactions.
+An end-to-end machine-learning project for detecting fraudulent credit card
+transactions in severely imbalanced data. It audits and explores 284,807
+transactions, compares three resampling strategies across four classifiers, and
+selects the strongest model using precision, recall, F1-score, and ROC-AUC
+rather than misleading raw accuracy.
 
 [Explore the notebook](./Fraud%20Detection.ipynb) | [Get the dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) | [View results](#model-performance)
 
-</div>
-
----
+> [!IMPORTANT]
+> Fraud predictions should support, not replace, analyst review and human
+> judgment. Validate model outputs and investigate flagged transactions before
+> taking action that affects a customer.
 
 ## Overview
 
@@ -205,12 +207,6 @@ Credit-Card-Fraud-Detection/
 - Time-aware validation to detect performance drift
 - A versioned preprocessing and inference pipeline
 - Model monitoring and explainability for analyst review
-
-## Responsible use
-
-This project is intended for education and experimentation. Fraud predictions
-should support layered controls and human review, not serve as the sole basis
-for blocking a payment or making decisions about a customer.
 
 ---
 
