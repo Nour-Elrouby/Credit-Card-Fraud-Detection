@@ -175,9 +175,3 @@ Credit-Card-Fraud-Detection/
 - Time-aware validation to detect performance drift
 - A versioned preprocessing and inference pipeline
 - Model monitoring and explainability for analyst review
-
----
-
-<div align="center">
-Built by <a href="https://github.com/Nour-Elrouby">Nour Elrouby</a>
-</div>
