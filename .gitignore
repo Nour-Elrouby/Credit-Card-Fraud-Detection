@@ -1,0 +1,40 @@
+# Local dataset (larger than GitHub's standard file limit)
+creditcard.csv
+
+# Local Streamlit application requested to remain unpublished
+app.py
+.streamlit/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model and experiment artifacts
+*.joblib
+*.pkl
+*.pickle
+artifacts/
+models/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets and environment configuration
+.env
+.env.*
+!.env.example
