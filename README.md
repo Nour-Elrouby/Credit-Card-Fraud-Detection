@@ -133,46 +133,6 @@ September 2013.
 The dataset is not committed because `creditcard.csv` is approximately 151 MB,
 which exceeds GitHub's standard per-file limit.
 
-## Quick start
-
-### Prerequisites
-
-- Python 3.10 or newer
-- Git
-- The downloaded Kaggle dataset
-
-### Installation
-
-```bash
-git clone https://github.com/Nour-Elrouby/Credit-Card-Fraud-Detection.git
-cd Credit-Card-Fraud-Detection
-
-python -m venv .venv
-```
-
-Activate the environment:
-
-```bash
-# Windows PowerShell
-.venv\Scripts\Activate.ps1
-
-# macOS / Linux
-source .venv/bin/activate
-```
-
-Install the dependencies:
-
-```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-Download `creditcard.csv` from Kaggle, place it in the project root, and launch:
-
-```bash
-jupyter notebook "Fraud Detection.ipynb"
-```
-
 ## Repository structure
 
 ```text
