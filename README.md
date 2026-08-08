@@ -1,156 +1,219 @@
+<div align="center">
+
 # Credit Card Fraud Detection
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikitlearn&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-Classifier-1893F8)
-![Use](https://img.shields.io/badge/Use-Educational-31C48D)
+### Machine learning for highly imbalanced transaction data
 
-An end-to-end machine-learning study for detecting fraudulent credit-card
-transactions in a highly imbalanced dataset. The project compares four
-classifiers across three resampling strategies and evaluates them with metrics
-that reflect the real cost of fraud detection: precision, recall, F1-score, and
-ROC-AUC.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-006600?style=flat-square)](https://xgboost.readthedocs.io/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=flat-square&logo=jupyter&logoColor=white)](https://jupyter.org/)
 
-## Project highlights
+An end-to-end fraud detection study comparing four classifiers and three
+resampling strategies on 284,807 real-world credit card transactions.
 
-- Explores 284,807 anonymized European card transactions.
-- Handles a fraud rate of only **0.173%** (492 fraudulent transactions).
-- Compares Random Undersampling, SMOTE, and SMOTEENN.
-- Benchmarks Logistic Regression, Decision Tree, Random Forest, and XGBoost.
-- Uses a stratified train/test split and fits preprocessing on training data only.
-- Selects the best experiment by F1-score instead of misleading raw accuracy.
+[Explore the notebook](./Fraud%20Detection.ipynb) | [Get the dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) | [View results](#model-performance)
 
-## Best result
+</div>
 
-The strongest experiment in the notebook is **Random Forest with SMOTEENN**.
+---
 
-| Metric | Score |
-|---|---:|
-| Precision | 0.8736 |
-| Recall | 0.8000 |
-| F1-score | **0.8352** |
-| ROC-AUC | 0.9655 |
+## Overview
 
-The highest ROC-AUC, **0.9766**, was produced by XGBoost with random
-undersampling, but its low precision made it less suitable as the overall winner.
+Credit card fraud detection is an extreme class-imbalance problem: only **492 of
+284,807 transactions (0.173%)** in this dataset are fraudulent. A model can
+achieve more than 99% accuracy by predicting every transaction as legitimate,
+so this project focuses on metrics that measure useful fraud detection:
+**precision, recall, F1-score, and ROC-AUC**.
 
-## Experiment results
+The notebook covers data validation, exploratory analysis, leakage-safe
+preprocessing, imbalance handling, model training, and comparative evaluation.
+
+### At a glance
+
+| Dataset | Models | Sampling strategies | Best experiment |
+|:--|:--|:--|:--|
+| 284,807 transactions | Logistic Regression | Random Undersampling | Random Forest |
+| 30 input features | Decision Tree | SMOTE | SMOTEENN |
+| 492 fraud cases | Random Forest | SMOTEENN | **F1: 0.8352** |
+| 0.173% fraud rate | XGBoost | | **AUC: 0.9655** |
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A[Raw transactions] --> B[Data audit and EDA]
+    B --> C[Remove duplicates]
+    C --> D[Stratified train-test split]
+    D --> E[Robust-scale Amount]
+    E --> F{Training resampling}
+    F --> G[Undersampling]
+    F --> H[SMOTE]
+    F --> I[SMOTEENN]
+    G --> J[Train 4 classifiers]
+    H --> J
+    I --> J
+    J --> K[Precision / Recall / F1 / ROC-AUC]
+    K --> L[Select best model]
+```
+
+> Resampling and scaler fitting are performed on the training partition. The
+> held-out test set remains untouched for final comparison.
+
+## Model performance
+
+### Best overall model
+
+**Random Forest + SMOTEENN** produced the highest F1-score, balancing fraud
+detection coverage with a low false-alert rate.
+
+| Precision | Recall | F1-score | ROC-AUC |
+|---:|---:|---:|---:|
+| **0.8736** | **0.8000** | **0.8352** | **0.9655** |
+
+### Leading experiments
 
 | Rank | Sampling | Model | Precision | Recall | F1-score | ROC-AUC |
-|---:|---|---|---:|---:|---:|---:|
+|---:|:--|:--|---:|---:|---:|---:|
 | 1 | SMOTEENN | Random Forest | 0.8736 | 0.8000 | **0.8352** | 0.9655 |
 | 2 | SMOTE | Random Forest | **0.9125** | 0.7684 | 0.8343 | 0.9545 |
 | 3 | SMOTE | XGBoost | 0.7475 | 0.7789 | 0.7629 | 0.9634 |
-| 4 | SMOTEENN | XGBoost | 0.7196 | 0.8105 | 0.7624 | 0.9637 |
-| 5 | SMOTEENN | Decision Tree | 0.3613 | 0.7263 | 0.4825 | 0.8621 |
-| 6 | SMOTE | Decision Tree | 0.3516 | 0.6737 | 0.4621 | 0.8358 |
-| 7 | Undersampling | Random Forest | 0.0792 | 0.8632 | 0.1450 | 0.9746 |
-| 8 | SMOTE | Logistic Regression | 0.0536 | 0.8737 | 0.1010 | 0.9595 |
-| 9 | SMOTEENN | Logistic Regression | 0.0527 | 0.8737 | 0.0994 | 0.9596 |
-| 10 | Undersampling | XGBoost | 0.0510 | 0.8632 | 0.0963 | **0.9766** |
-| 11 | Undersampling | Logistic Regression | 0.0501 | 0.8737 | 0.0948 | 0.9547 |
-| 12 | Undersampling | Decision Tree | 0.0190 | **0.9158** | 0.0373 | 0.9183 |
+| 4 | SMOTEENN | XGBoost | 0.7196 | **0.8105** | 0.7624 | 0.9637 |
 
-## Repository structure
+<details>
+<summary><strong>View all 12 experiment results</strong></summary>
 
-```text
-.
-├── Fraud Detection.ipynb   # EDA, preprocessing, training, and evaluation
-├── requirements.txt        # Reproducible notebook dependencies
-├── .gitignore
-└── README.md
-```
+<br>
 
-The dataset is intentionally excluded because the CSV is larger than GitHub's
-standard file-size limit. Local application files are also excluded from this
-repository.
+| Sampling | Model | Precision | Recall | F1-score | ROC-AUC |
+|:--|:--|---:|---:|---:|---:|
+| SMOTEENN | Random Forest | 0.8736 | 0.8000 | 0.8352 | 0.9655 |
+| SMOTE | Random Forest | 0.9125 | 0.7684 | 0.8343 | 0.9545 |
+| SMOTE | XGBoost | 0.7475 | 0.7789 | 0.7629 | 0.9634 |
+| SMOTEENN | XGBoost | 0.7196 | 0.8105 | 0.7624 | 0.9637 |
+| SMOTEENN | Decision Tree | 0.3613 | 0.7263 | 0.4825 | 0.8621 |
+| SMOTE | Decision Tree | 0.3516 | 0.6737 | 0.4621 | 0.8358 |
+| Undersampling | Random Forest | 0.0792 | 0.8632 | 0.1450 | 0.9746 |
+| SMOTE | Logistic Regression | 0.0536 | 0.8737 | 0.1010 | 0.9595 |
+| SMOTEENN | Logistic Regression | 0.0527 | 0.8737 | 0.0994 | 0.9596 |
+| Undersampling | XGBoost | 0.0510 | 0.8632 | 0.0963 | **0.9766** |
+| Undersampling | Logistic Regression | 0.0501 | 0.8737 | 0.0948 | 0.9547 |
+| Undersampling | Decision Tree | 0.0190 | 0.9158 | 0.0373 | 0.9183 |
+
+</details>
+
+The highest ROC-AUC came from undersampled XGBoost, but its precision of 0.0510
+would create too many false alerts. Selecting by F1-score gives a more practical
+balance for this experiment.
 
 ## Dataset
 
-This project uses the
-[Credit Card Fraud Detection dataset on Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
-It contains transactions made by European cardholders during two days in
+The project uses the public
+[Credit Card Fraud Detection dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud),
+containing European cardholder transactions collected over two days in
 September 2013.
 
-Most input variables (`V1`–`V28`) are PCA-transformed for confidentiality.
-`Time` and `Amount` retain their original meanings, and `Class` is the target:
+| Field | Description |
+|:--|:--|
+| `Time` | Seconds elapsed since the first recorded transaction |
+| `V1` - `V28` | PCA-transformed numerical features |
+| `Amount` | Transaction value |
+| `Class` | Target: `0` legitimate, `1` fraudulent |
 
-- `0` — legitimate transaction
-- `1` — fraudulent transaction
+The dataset is not committed because `creditcard.csv` is approximately 151 MB,
+which exceeds GitHub's standard per-file limit.
 
-Download `creditcard.csv` from Kaggle and place it in the repository root before
-running the notebook.
+## Quick start
 
-## Getting started
+### Prerequisites
 
-### 1. Clone the repository
+- Python 3.10 or newer
+- Git
+- The downloaded Kaggle dataset
+
+### Installation
 
 ```bash
 git clone https://github.com/Nour-Elrouby/Credit-Card-Fraud-Detection.git
 cd Credit-Card-Fraud-Detection
-```
 
-### 2. Create a virtual environment
-
-```bash
 python -m venv .venv
 ```
 
-Activate it on Windows:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Or on macOS/Linux:
+Activate the environment:
 
 ```bash
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+Install the dependencies:
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Add the dataset and launch Jupyter
+Download `creditcard.csv` from Kaggle, place it in the project root, and launch:
 
 ```bash
 jupyter notebook "Fraud Detection.ipynb"
 ```
 
-## Methodology
+## Repository structure
 
-1. **Data audit** — inspect schema, class distribution, missing values, and duplicates.
-2. **Exploratory analysis** — visualize class balance, correlations, and selected feature relationships.
-3. **Preprocessing** — remove duplicate rows and the `Time` column, then robust-scale `Amount`.
-4. **Stratified split** — preserve the rare fraud ratio in the held-out test set.
-5. **Resampling** — compare undersampling, SMOTE, and SMOTEENN on training data.
-6. **Modeling** — train four classification algorithms for every sampling strategy.
-7. **Evaluation** — compare confusion matrices, ROC curves, precision, recall, F1, and ROC-AUC.
+```text
+Credit-Card-Fraud-Detection/
+|-- Fraud Detection.ipynb   # Complete analysis and model comparison
+|-- requirements.txt        # Python notebook dependencies
+|-- .gitignore              # Local data and generated-file exclusions
+`-- README.md               # Project documentation
+```
 
-## Key takeaways
+## Technical approach
 
-- Accuracy is not informative when more than 99.8% of transactions are legitimate.
-- Random Forest delivered the best F1-score after hybrid SMOTEENN resampling.
-- Undersampling increased recall and ROC-AUC in several experiments, but produced
-  too many false positives and therefore very low precision.
-- The operating threshold should ultimately be tuned to the business cost of a
-  missed fraud case versus a false alert.
+| Stage | Implementation |
+|:--|:--|
+| Validation | Schema inspection, null checks, duplicate checks, class counts |
+| Exploration | Class distribution, pair plots, correlations, feature relationships |
+| Cleaning | Duplicate removal and `Time` feature removal |
+| Preprocessing | Stratified 80/20 split and `RobustScaler` for `Amount` |
+| Imbalance handling | `RandomUnderSampler`, `SMOTE`, and `SMOTEENN` |
+| Models | Logistic Regression, Decision Tree, Random Forest, XGBoost |
+| Evaluation | Confusion matrices, precision, recall, F1-score, ROC curves, ROC-AUC |
 
-## Future improvements
+## Key findings
 
-- Tune model hyperparameters with stratified cross-validation.
-- Optimize the probability threshold against a cost-sensitive objective.
-- Compare class-weighted learners with resampling approaches.
-- Add probability calibration and precision-recall curves.
-- Use time-aware validation to better approximate production deployment.
-- Package preprocessing and inference into a versioned model pipeline.
+- Accuracy is unsuitable as the main metric for a dataset this imbalanced.
+- Random Forest was the most effective classifier by F1-score after SMOTE-based
+  resampling.
+- Undersampling improved recall and ROC-AUC for some models but sharply reduced
+  precision.
+- Ensemble models consistently offered a stronger precision-recall trade-off
+  than a single Decision Tree.
+- A production system should tune its decision threshold using the financial
+  costs of missed fraud and false alerts.
+
+## Next steps
+
+- Hyperparameter tuning with stratified cross-validation
+- Precision-recall curve and probability calibration analysis
+- Cost-sensitive learning and business-aware threshold optimization
+- Time-aware validation to detect performance drift
+- A versioned preprocessing and inference pipeline
+- Model monitoring and explainability for analyst review
 
 ## Responsible use
 
-This repository is an educational machine-learning project. A fraud score should
-support human review and layered risk controls; it should not be the sole basis
-for blocking transactions or making decisions about customers.
+This project is intended for education and experimentation. Fraud predictions
+should support layered controls and human review, not serve as the sole basis
+for blocking a payment or making decisions about a customer.
+
+---
+
+<div align="center">
+Built by <a href="https://github.com/Nour-Elrouby">Nour Elrouby</a>
+</div>
