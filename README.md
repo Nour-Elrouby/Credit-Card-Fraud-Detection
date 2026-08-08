@@ -2,10 +2,10 @@
 
 ---
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-006600?style=flat-square)](https://xgboost.readthedocs.io/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=flat-square&logo=jupyter&logoColor=white)](https://jupyter.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-2563EB?style=for-the-badge&logo=python&logoColor=white&labelColor=111827)](https://www.python.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-0F766E?style=for-the-badge&logo=scikitlearn&logoColor=white&labelColor=111827)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-7C3AED?style=for-the-badge&logoColor=white&labelColor=111827)](https://xgboost.readthedocs.io/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-D97706?style=for-the-badge&logo=jupyter&logoColor=white&labelColor=111827)](https://jupyter.org/)
 
 An end-to-end machine-learning project for detecting fraudulent credit card
 transactions in severely imbalanced data. It audits and explores 284,807
